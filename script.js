@@ -12,6 +12,7 @@
 // limitations under the License.
 import { PoseLandmarker, FilesetResolver, DrawingUtils } from "https://cdn.skypack.dev/@mediapipe/tasks-vision@0.10.0";
 const demosSection = document.getElementById("demos");
+const the_current_state = document.getElementById("the_current_state")
 let poseLandmarker = undefined;
 let runningMode = "VIDEO";
 let enableWebcamButton;
@@ -130,7 +131,8 @@ async function predictWebcam() {
                         squat = false;
                         standing = true;
                         sitting = false;
-                        console.log("Aap khade hogye hain");
+                        the_current_state.innerText = "Aap khade hogye hain";
+                        // console.log("Aap khade hogye hain");
                     }
                 }
                 if(left_angle<=sqaut_threshold && right_angle<=sqaut_threshold){
@@ -138,7 +140,8 @@ async function predictWebcam() {
                         squat = true;
                         standing = false;
                         squat_count += 1;
-                        console.log("Aap squat position mai hai and squat count = ",squat_count);
+                        the_current_state.innerText = "Aap squat position mai hai and squat count = " + squat_count;
+                        // console.log("Aap squat position mai hai and squat count = ",squat_count);
                     }
                 }
                 if(left_angle<sitting_threshold && right_angle<sitting_threshold){
@@ -146,7 +149,8 @@ async function predictWebcam() {
                         sitting = true;
                         standing = false;
                         squat = false;
-                        console.log("Aap baith gaye hain!!");
+                        the_current_state.innerText = "Aap baith gaye hain!!";
+                        // console.log("Aap baith gaye hain!!");
                     }
                 }
                 drawingUtils.drawLandmarks(landmark, {
